@@ -26,8 +26,6 @@ const cards: CardData[] = [
   },
 ];
 
-console.log(cards);
-
 export default function Main(): React.JSX.Element {
   const [popup, setPopup] = useState<PopupConfig | null>(null);
 
