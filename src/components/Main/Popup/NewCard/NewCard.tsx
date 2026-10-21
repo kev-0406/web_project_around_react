@@ -1,6 +1,24 @@
+import { useState, useContext } from 'react';
+import CurrentUserContext from '../../../../contexts/CurrentUserContext';
+
 export default function NewCard(): React.JSX.Element {
+  const { handleAddPlaceSubmit } = useContext(CurrentUserContext);
+
+  const [name, setName] = useState('');
+  const [link, setLink] = useState('');
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    handleAddPlaceSubmit({ name, link });
+  };
+
   return (
-    <form className='popup__form' id='new-card-form' name='new-card-form' noValidate>
+    <form
+      className='popup__form'
+      id='new-card-form'
+      name='new-card-form'
+      onSubmit={handleSubmit}
+    >
       <label className='popup__field'>
         <input
           id='card-name'
@@ -11,6 +29,8 @@ export default function NewCard(): React.JSX.Element {
           maxLength={30}
           required
           type='text'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <span className='popup__error' id='card-name-error'></span>
       </label>
@@ -22,6 +42,8 @@ export default function NewCard(): React.JSX.Element {
           placeholder='Enlace de la imagen'
           required
           type='url'
+          value={link}
+          onChange={(e) => setLink(e.target.value)}
         />
         <span className='popup__error' id='card-url-error'></span>
       </label>
