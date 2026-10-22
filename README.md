@@ -1,75 +1,29 @@
-# React + TypeScript + Vite
+# Around the U.S.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web hecha con React, TypeScript y Vite. Muestra el perfil de un usuario y una galería de tarjetas con lugares, conectada a una API real.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Carga del perfil y de las tarjetas desde la API al abrir la página.
+- Edición del nombre y la descripción del perfil.
+- Cambio de la foto de perfil.
+- Creación de nuevas tarjetas.
+- Like y quitar like en las tarjetas.
+- Eliminación de tarjetas propias, con ventana de confirmación.
+- Ventana emergente para ver una imagen en grande.
 
-## React Compiler
+## Tecnologías
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- TypeScript
+- Vite
+- Context API (`CurrentUserContext`)
+- CSS con metodología BEM
 
-## Expanding the ESLint configuration
+## Estructura del proyecto
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+- `src/components`: componentes de React (`App`, `Header`, `Main`, `Card`, popups y `Footer`).
+- `src/contexts`: contexto del usuario actual.
+- `src/interfaces`: definiciones de tipos de TypeScript.
+- `src/utils`: clase `Api` para comunicarse con el servidor.
+- `src/blocks`: hojas de estilo.
