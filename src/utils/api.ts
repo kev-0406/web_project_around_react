@@ -1,6 +1,6 @@
+import type { UserData } from '../interfaces/UserData';
+import type { CardData } from '../interfaces/CardData';
 import type {
-  UserData,
-  CardData,
   CardFormData,
   UserFormData,
   AvatarFormData,
@@ -23,78 +23,78 @@ class Api {
     this.headers = options.headers;
   }
 
-  private async handleResponse<T>(res: Response): Promise<T> {
-    if (res.ok) {
-      return await res.json();
+  private async handleResponse<T>(response: Response): Promise<T> {
+    if (response.ok) {
+      return await response.json();
     }
-    const detail = await res.text();
-    throw new Error(`Error: ${res.status}: ${detail}`);
+    const detail = await response.text();
+    throw new Error(`Error: ${response.status}: ${detail}`);
   }
 
   async getUserInfo(): Promise<UserData> {
-    const res = await fetch(`${this.baseUrl}/users/me`, {
+    const response = await fetch(`${this.baseUrl}/users/me`, {
       headers: { authorization: this.headers.authorization },
     });
-    return this.handleResponse<UserData>(res);
+    return this.handleResponse<UserData>(response);
   }
 
   async getInitialCards(): Promise<CardData[]> {
-    const res = await fetch(`${this.baseUrl}/cards`, {
+    const response = await fetch(`${this.baseUrl}/cards`, {
       headers: { authorization: this.headers.authorization },
     });
-    return this.handleResponse<CardData[]>(res);
+    return this.handleResponse<CardData[]>(response);
   }
 
   async addCard(data: CardFormData): Promise<CardData> {
-    const res = await fetch(`${this.baseUrl}/cards`, {
+    const response = await fetch(`${this.baseUrl}/cards`, {
       method: 'POST',
       headers: this.headers,
       body: JSON.stringify(data),
     });
-    return this.handleResponse<CardData>(res);
+    return this.handleResponse<CardData>(response);
   }
 
   async updateUserInfo(data: UserFormData): Promise<UserData> {
-    const res = await fetch(`${this.baseUrl}/users/me`, {
+    const response = await fetch(`${this.baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify(data),
     });
-    return this.handleResponse<UserData>(res);
+    return this.handleResponse<UserData>(response);
   }
 
   async updateAvatar(data: AvatarFormData): Promise<UserData> {
-    const res = await fetch(`${this.baseUrl}/users/me/avatar`, {
+    const response = await fetch(`${this.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify(data),
     });
-    return this.handleResponse<UserData>(res);
+    return this.handleResponse<UserData>(response);
   }
 
   async addLike(cardId: string): Promise<CardData> {
-    const res = await fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+    const response = await fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this.headers,
     });
-    return this.handleResponse<CardData>(res);
+    return this.handleResponse<CardData>(response);
   }
 
   async removeLike(cardId: string): Promise<CardData> {
-    const res = await fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+    const response = await fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this.headers,
     });
-    return this.handleResponse<CardData>(res);
+    return this.handleResponse<CardData>(response);
   }
 
   async deleteCard(cardId: string): Promise<void> {
-    const res = await fetch(`${this.baseUrl}/cards/${cardId}`, {
+    const response = await fetch(`${this.baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this.headers,
     });
-    if (!res.ok) {
-      throw new Error(`Error: ${res.status}`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
     }
   }
 }
@@ -102,7 +102,7 @@ class Api {
 const api = new Api({
   baseUrl: 'https://around-api.es.tripleten-services.com/v1',
   headers: {
-    authorization: import.meta.env.VITE_API_TOKEN,
+    authorization: 'c8103da6-646f-4d22-b1ec-a615c552b361',
     'Content-Type': 'application/json',
   },
 });

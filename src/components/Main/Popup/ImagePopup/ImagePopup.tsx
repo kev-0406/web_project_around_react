@@ -1,4 +1,4 @@
-import type { CardData } from '../../../../types/types';
+import type { CardData } from '../../../../interfaces/CardData';
 
 type ImagePopupProps = {
   card: CardData;

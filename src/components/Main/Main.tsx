@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import type { PopupConfig, CardData } from '../../types/types';
+import type { ModalData } from '../../interfaces/ModalData';
+import type { CardData } from '../../interfaces/CardData';
 import Popup from './Popup/Popup';
 import NewCard from './Popup/NewCard/NewCard';
 import EditProfile from './Popup/EditProfile/EditProfile';
@@ -9,8 +10,8 @@ import Card from './Card/Card';
 
 type MainProps = {
   cards: CardData[];
-  popup: PopupConfig | null;
-  handleOpenPopup: (popup: PopupConfig) => void;
+  popup: ModalData | null;
+  handleOpenPopup: (popup: ModalData) => void;
   handleClosePopup: () => void;
   onCardLike: (card: CardData) => void;
   onCardDelete: (card: CardData) => void;
@@ -20,17 +21,17 @@ export default function Main(props: MainProps): React.JSX.Element {
   const { cards, popup, handleOpenPopup, handleClosePopup, onCardLike, onCardDelete } = props;
   const { currentUser } = useContext(CurrentUserContext);
 
-  const newCardPopup: PopupConfig = {
+  const newCardPopup: ModalData = {
     title: 'Nuevo lugar',
     children: <NewCard />,
   };
 
-  const editProfilePopup: PopupConfig = {
+  const editProfilePopup: ModalData = {
     title: 'Editar perfil',
     children: <EditProfile />,
   };
 
-  const editAvatarPopup: PopupConfig = {
+  const editAvatarPopup: ModalData = {
     title: 'Actualizar foto de perfil',
     children: <EditAvatar />,
   };
